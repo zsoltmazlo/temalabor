@@ -43,6 +43,15 @@
 
 #define PWM_CHANNEL 1  //  5:5channel ; 3:3channel
 
+#define MQTT_BROKER				"192.168.1.128"
+#define MQTT_CLIENT_ID			"esp-servo"
+#define MQTT_SENSOR_CH			"esp01"
+#define MQTT_BUF_SIZE			2048
+#define MQTT_RECONNECT_TIMEOUT	0
+#define PROTOCOL_NAMEv31		/*MQTT version 3.1 compatible with Mosquitto v0.15*/
+
+#define WIFI_SSID				""
+#define WIFI_PASS				""
 
 #endif /* USER_CONFIG_H */
 

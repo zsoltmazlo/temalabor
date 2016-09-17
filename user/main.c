@@ -7,6 +7,7 @@
 #include "debug.h"
 #include "user_config.h"
 #include "servo.h"
+#include "connection.h"
 
 #define TASK_SERVO_PRIO 1
 #define TASK_SERVO_QUEUE_LEN 1
@@ -26,12 +27,12 @@ void ICACHE_FLASH_ATTR user_servo_task(os_event_t *events) {
 	D("setting next servo position...");
 	servo_set_next_position(&position);
 	D("done.");
-	
+
 	// setup servo position
 	D("setting servo position...");
 	servo_set_to_position(position);
 	D("done.");
-	
+
 	// then post task to give process time for other tasks
 	system_os_post(TASK_SERVO_PRIO, 0, 0);
 }
@@ -52,14 +53,22 @@ void ICACHE_FLASH_ATTR user_init(void) {
 	// initializing uart
 	uart_init(BIT_RATE_115200, BIT_RATE_115200);
 
+	uint8 maccaddr[6];
+	wifi_get_macaddr(STATION_IF, maccaddr);
+	char mac[20];
+	os_sprintf(mac, MACSTR, MAC2STR(maccaddr));
+	D("Mac: %s", mac);
+	
 	servo_init();
-	
+
+	connection_init();
+
 	//Start os tasks
-	system_os_task(
-			user_servo_task, TASK_SERVO_PRIO,
-			user_servoTaskQueue, TASK_SERVO_QUEUE_LEN);
-	
-	system_os_post(TASK_SERVO_PRIO, 0, 0);
+//	system_os_task(
+//			user_servo_task, TASK_SERVO_PRIO,
+//			user_servoTaskQueue, TASK_SERVO_QUEUE_LEN);
+//
+//	system_os_post(TASK_SERVO_PRIO, 0, 0);
 
 	system_init_done_cb(init_done);
 }

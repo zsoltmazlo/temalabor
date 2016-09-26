@@ -58,17 +58,18 @@ void ICACHE_FLASH_ATTR user_init(void) {
 	char mac[20];
 	os_sprintf(mac, MACSTR, MAC2STR(maccaddr));
 	D("Mac: %s", mac);
-	
+
 	servo_init();
+	servo_set_to_position(Positive0Degress);
 
 	connection_init();
 
 	//Start os tasks
-//	system_os_task(
-//			user_servo_task, TASK_SERVO_PRIO,
-//			user_servoTaskQueue, TASK_SERVO_QUEUE_LEN);
-//
-//	system_os_post(TASK_SERVO_PRIO, 0, 0);
+	//	system_os_task(
+	//			user_servo_task, TASK_SERVO_PRIO,
+	//			user_servoTaskQueue, TASK_SERVO_QUEUE_LEN);
+	//
+	//	system_os_post(TASK_SERVO_PRIO, 0, 0);
 
 	system_init_done_cb(init_done);
 }

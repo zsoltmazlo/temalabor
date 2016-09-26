@@ -13,6 +13,7 @@
 void servo_init(void) {
 	uint32 io_info[][3] = {
 		{PWM_0_OUT_IO_MUX, PWM_0_OUT_IO_FUNC, PWM_0_OUT_IO_NUM},
+		{PWM_3_OUT_IO_MUX, PWM_3_OUT_IO_FUNC, PWM_3_OUT_IO_NUM},
 	};
 
 	uint32 pwm_init_duty[PWM_CHANNEL] = {0};
@@ -45,6 +46,7 @@ void servo_set_to_position(ServoPosition position) {
 
 	D("servo position called, duty: %d", duty);
 	pwm_set_duty(duty, 0);
+	pwm_set_duty(duty, 1);
 	pwm_start();
 }
 

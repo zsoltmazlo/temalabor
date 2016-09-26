@@ -15,13 +15,14 @@
 #define SERVO_H
 
 // 2ms
-#define POS_90N 61000
+#define POS_90N 50000
 
 // 1ms
-#define POS_90P 17000
+#define POS_90P 17500
 
 // 1.5ms 
-#define POS_00 37500
+#define POS_00 39500
+//#define POS_00 42500
 
 typedef enum {
 	Positive90Degrees,
